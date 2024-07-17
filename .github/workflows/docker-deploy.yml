@@ -29,13 +29,14 @@ jobs:
       run: |
         IMAGE_NAME=myapp:${{ env.BRANCH_NAME }}
         docker build -t $IMAGE_NAME .
-        docker tag $IMAGE_NAME my-dockerhub-username/$IMAGE_NAME
-        docker push my-dockerhub-username/$IMAGE_NAME
+        docker tag $IMAGE_NAME osadeleke/$IMAGE_NAME
+        docker push osadeleke/$IMAGE_NAME
+
     - name: Deploy Docker container
       env:
         DOCKER_HOST: tcp://167.99.255.84:2375
       run: |
-        IMAGE_NAME=my-dockerhub-username/myapp:${{ env.BRANCH_NAME }}
+        IMAGE_NAME=osadeleke/myapp:${{ env.BRANCH_NAME }}
         CONTAINER_NAME=myapp-${{ env.BRANCH_NAME }}
         docker pull $IMAGE_NAME
         docker stop $CONTAINER_NAME || true
